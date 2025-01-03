@@ -1,0 +1,51 @@
+ # Step 1: Extract the zip folder
+ unzip("/content/ECG-Dataset", "/content/ECG-Dataset")
+ # Step 2: Import the necessary neural network libraries
+ from tensorflow.keras.models import Sequential
+ from tensorflow.keras.layers import Dense
+ from tensorflow.keras.layers import Convolution2D
+ from tensorflow.keras.layers import MaxPooling2D
+ from tensorflow.keras.layers import Flatten
+ # Step 3: Image Preprocessing
+ # Create a data generator for training images
+ train_datagen = ImageDataGenerator(rescale=1./255, shear_range=0.2, zoom_range=0.2,
+ horizontal_flip=True)
+ # Create a data generator for test images
+ test_datagen = ImageDataGenerator(rescale=1./255)
+ # Load and preprocess the training images
+ x_train = train_datagen.flow_from_directory("/content/ECG-Dataset/Dataset/train",
+ target_size=(64,64), batch_size=32, class_mode="categorical")
+ # Load and preprocess the test images
+ x_test = test_datagen.flow_from_directory("/content/ECG-Dataset/Dataset/test",
+ target_size=(64,64), batch_size=32, class_mode="categorical")
+ # Step 4: Initialize the neural network model
+ model = Sequential()
+ # Step 5: Create the Convolutional Neural Network (CNN) layers
+ # Add a 2Dconvolutional layer with 32 filters and a 3x3 kernel, using ReLU activation
+ function
+ model.add(Convolution2D(32, (3,3), input_shape=(64,64,3), activation="relu"))
+ School of Computer Science Engineering & Information Science, Presidency University
+ Page 32 of 42
+Deep Learning classification 0n 2-D ECG Spectral Images
+ # Add a maxpooling layer with a 2x2 pool size
+ model.add(MaxPooling2D(pool_size=(2,2))
+ # Add a flatten layer to convert the 2D feature maps to a 1D feature vector
+ model.add(Flatten())
+ # Step 6: Add the hidden layers
+ # Add a fully connected dense layer with 200 units and ReLU activation function
+ model.add(Dense(units=200, activation="relu", kernel_initializer="random_uniform"))
+ # Add another fully connected dense layer with 300 units and ReLU activation function
+ model.add(Dense(units=300, activation="relu", kernel_initializer="random_uniform"))
+ # Step 7: Add the output layer
+ # Add a fully connected dense layer with 6 units (assuming 6 classes) and softmax activation
+ function for multi-class classification
+ model.add(Dense(units=6, activation="softmax", kernel_initializer="random_uniform"))
+ # Step 8: Compile the model
+ # Compile the model using the Adam optimizer, categorical cross-entropy loss function, and
+ accuracy metric
+ model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
+ # Step 9: Train the model using the training data generator
+ # Train the model for 25 epochs with 480 steps per epoch and validation data from the test
+ data generator with 160 validation steps
+ model.fit_generator(x_train, steps_per_epoch=480, epochs=25, validation_data=x_test,
+ validation_steps=160)
