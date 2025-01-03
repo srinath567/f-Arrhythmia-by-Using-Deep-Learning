@@ -1,0 +1,67 @@
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Predict</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">    
+<style>
+.bar
+{
+margin: 0px;
+padding:20px;
+background-color:white;
+opacity:0.6;
+color:black;
+font-family:'Roboto',sans-serif;
+font-style: italic;
+border-radius:20px;
+font-size:25px;
+}
+a
+{
+color:grey;
+float:right;
+text-decoration:none;
+font-style:normal;
+padding-right:20px;
+}
+a:hover{
+background-color:black;
+color:white;
+border-radius:15px;0
+font-size:30px;
+padding-left:10px;
+}
+body
+{
+    background-image: url("https://www.bing.com/th/id/OGC.7ef46049d95ee7d5fa19581a36b02d2e?pid=1.7&rurl=https%3a%2f%2fsites.csulb.edu%2fcolleges%2fcoe%2fcvrc%2fwp-content%2fuploads%2f2020%2f10%2fNEW_Heartbeat_looping_GIF_NORMAL_0.gif&ehk=zzoc%2bXMMWXP4UMOjAN874jWPxqhga0RVkBggnzkgrBA%3d");
+    background-size:cover;
+}
+</style>   
+</head>
+
+<body>
+<div class="bar">
+<a href="/upload" >Predict</a>
+<a href="/info">Info</a>
+<a href="/about">Home</a>
+<a href="/contact">contact</a>
+<br>
+</div>
+    <div class="container">
+       <center> <div id="content" style="margin-top:2em">{% block content %}{% endblock %}</div></center>
+    </div>
+</body>
+
+<footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}" type="text/javascript"></script>    
+</footer>
+
+</html>
